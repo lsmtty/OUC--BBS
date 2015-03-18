@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="org.fft.oucbbs.PostEntity" table="Post" schema="" catalog="OUC-BBS">
+        <id name="id">
+            <column name="id" sql-type="int" not-null="true"/>
+        </id>
+        <property name="postowner">
+            <column name="postowner" sql-type="int" not-null="true"/>
+        </property>
+        <property name="postname">
+            <column name="postname" sql-type="varchar" length="20" not-null="true"/>
+        </property>
+        <set name="articlesById" inverse="true">
+            <key>
+                <column name="postid" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="org.fft.oucbbs.ArticleEntity"/>
+        </set>
+    </class>
+</hibernate-mapping>

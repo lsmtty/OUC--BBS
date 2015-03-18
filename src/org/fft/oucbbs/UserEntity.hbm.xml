@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="org.fft.oucbbs.UserEntity" table="User" schema="" catalog="OUC-BBS">
+        <id name="id">
+            <column name="id" sql-type="int" not-null="true"/>
+        </id>
+        <property name="username">
+            <column name="username" sql-type="varchar" length="45" not-null="true"/>
+        </property>
+        <property name="password">
+            <column name="password" sql-type="varchar" length="128" not-null="true"/>
+        </property>
+        <property name="borntime">
+            <column name="borntime" sql-type="datetime" not-null="true"/>
+        </property>
+        <property name="lastlogin">
+            <column name="lastlogin" sql-type="datetime"/>
+        </property>
+        <property name="email">
+            <column name="email" sql-type="varchar" length="20" not-null="true"/>
+        </property>
+        <property name="level">
+            <column name="level" sql-type="int"/>
+        </property>
+        <property name="exeperience">
+            <column name="exeperience" sql-type="int"/>
+        </property>
+        <set name="articlesById" inverse="true">
+            <key>
+                <column name="authorid" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="org.fft.oucbbs.ArticleEntity"/>
+        </set>
+        <set name="commentsById" inverse="true">
+            <key>
+                <column name="authorid" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="org.fft.oucbbs.CommentEntity"/>
+        </set>
+    </class>
+</hibernate-mapping>
